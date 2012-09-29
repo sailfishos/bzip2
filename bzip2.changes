@@ -1,3 +1,6 @@
+* Sat Sep 29 2012 Marko Saukko <marko.saukko@jollamobile.com> - 1.0.6
+- Contributing to MER#174, move everything to /usr
+
 * Thu Nov 04 2010 Yan Yin <yan.yin@intel.com> - 1.0.6
 - update to 1.0.6 to close CVE bug (BMC #7736, #7737, CVE-2010-0405) 
 - Merge saneso and cflags patches into one 

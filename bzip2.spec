@@ -10,7 +10,6 @@ URL: http://www.bzip.org/
 Source: http://www.bzip.org/%{version}/bzip2-%{version}.tar.gz
 Patch0: bzip2-saneso-cflags.patch
 Patch6: bzip2-1.0.4-bzip2recover.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
 Bzip2 is a freely available, patent-free, high quality data compressor.
@@ -61,11 +60,11 @@ make CC="%{__cc}" AR=%{__ar} RANLIB=%{__ranlib} \
 rm -rf ${RPM_BUILD_ROOT}
 
 chmod 644 bzlib.h 
-mkdir -p $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,/%{_lib},%{_libdir},%{_includedir}}
+mkdir -p $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_libdir},%{_includedir}}
 cp -p bzlib.h $RPM_BUILD_ROOT%{_includedir}
 # temporary for rpm
 install -m 644 libbz2.a $RPM_BUILD_ROOT%{_libdir}
-install -m 755 libbz2.so.%{library_version} $RPM_BUILD_ROOT/%{_lib}
+install -m 755 libbz2.so.%{library_version} $RPM_BUILD_ROOT/%{_libdir}
 install -m 755 bzip2-shared  $RPM_BUILD_ROOT%{_bindir}/bzip2
 install -m 755 bzip2recover bzgrep bzdiff bzmore  $RPM_BUILD_ROOT%{_bindir}/
 cp -p bzip2.1 bzdiff.1 bzgrep.1 bzmore.1  $RPM_BUILD_ROOT%{_mandir}/man1/
@@ -73,21 +72,17 @@ ln -s bzip2 $RPM_BUILD_ROOT%{_bindir}/bunzip2
 ln -s bzip2 $RPM_BUILD_ROOT%{_bindir}/bzcat
 ln -s bzdiff $RPM_BUILD_ROOT%{_bindir}/bzcmp
 ln -s bzmore $RPM_BUILD_ROOT%{_bindir}/bzless
-ln -s libbz2.so.%{library_version} $RPM_BUILD_ROOT/%{_lib}/libbz2.so.1
-ln -s ../../%{_lib}/libbz2.so.1 $RPM_BUILD_ROOT/%{_libdir}/libbz2.so
+ln -s libbz2.so.%{library_version} $RPM_BUILD_ROOT/%{_libdir}/libbz2.so.1
+ln -s libbz2.so.1 $RPM_BUILD_ROOT/%{_libdir}/libbz2.so
 ln -s bzip2.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzip2recover.1
 ln -s bzip2.1 $RPM_BUILD_ROOT%{_mandir}/man1/bunzip2.1
 ln -s bzip2.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzcat.1
 ln -s bzdiff.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzcmp.1
 ln -s bzmore.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzless.1
 
-
 %post libs -p /sbin/ldconfig
 
 %postun libs  -p /sbin/ldconfig
-
-%clean
-rm -rf ${RPM_BUILD_ROOT}
 
 %files
 %defattr(-,root,root,-)
@@ -97,13 +92,12 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %files libs
 %defattr(-,root,root,-)
-/%{_lib}/*so.*
+%{_libdir}/*so.*
 
 %files devel
 %defattr(-,root,root,-)
-#%doc manual.html manual.pdf
 %{_includedir}/*
-/%{_libdir}/*so
+%{_libdir}/*so
 # Temporary for rpm
 %{_libdir}/*.a
 
