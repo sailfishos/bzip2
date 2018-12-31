@@ -3,7 +3,7 @@
 Summary: A file compression utility
 Name: bzip2
 Version: 1.0.6
-Release: 2
+Release: 3
 License: BSD
 Group: Applications/File
 URL: http://www.bzip.org/
@@ -39,6 +39,14 @@ Group: System Environment/Libraries
 %description libs
 
 Libraries for applications using the bzip2 compression format.
+
+%package doc
+Summary: Documentation for %{name}
+Group: Documentation
+Requires: bzip2 = %{version}-%{release}
+
+%description doc
+Man pages for %{name}.
 
 %prep
 %setup -q 
@@ -80,15 +88,17 @@ ln -s bzip2.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzcat.1
 ln -s bzdiff.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzcmp.1
 ln -s bzmore.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzless.1
 
+mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} CHANGES README
+
 %post libs -p /sbin/ldconfig
 
 %postun libs  -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root,-)
-%doc LICENSE CHANGES README 
+%license LICENSE
 %{_bindir}/*
-%doc %{_mandir}/*/*
 
 %files libs
 %defattr(-,root,root,-)
@@ -101,3 +111,7 @@ ln -s bzmore.1 $RPM_BUILD_ROOT%{_mandir}/man1/bzless.1
 # Temporary for rpm
 %{_libdir}/*.a
 
+%files doc
+%defattr(-,root,root,-)
+%doc %{_docdir}/%{name}-%{version}
+%doc %{_mandir}/*/*
