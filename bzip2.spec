@@ -9,7 +9,6 @@ Group: Applications/File
 URL: http://www.bzip.org/
 Source: http://www.bzip.org/%{version}/bzip2-%{version}.tar.gz
 Patch0: bzip2-saneso-cflags.patch
-Patch6: bzip2-1.0.4-bzip2recover.patch
 
 %description
 Bzip2 is a freely available, patent-free, high quality data compressor.
@@ -51,7 +50,6 @@ Man pages for %{name}.
 %prep
 %setup -q 
 %patch0 -p1 -b .saneso_cflags
-%patch6 -p1 -b .bz2recover
 
 %build
 
