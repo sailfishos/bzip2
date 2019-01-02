@@ -1,3 +1,6 @@
+* Mon Dec 31 2018 Tomi Leppänen <tomi.leppanen@jolla.com> - 1.0.6-3
+- [packaging] Add doc subpackage. Contributes to JB#24119
+
 * Sat Sep 29 2012 Marko Saukko <marko.saukko@jollamobile.com> - 1.0.6
 - Contributing to MER#174, move everything to /usr
 
