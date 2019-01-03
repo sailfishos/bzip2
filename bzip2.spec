@@ -6,8 +6,10 @@ Version: 1.0.6
 Release: 3
 License: BSD
 Group: Applications/File
-URL: http://www.bzip.org/
-Source: http://www.bzip.org/%{version}/bzip2-%{version}.tar.gz
+URL: https://git.merproject.org/mer-core/bzip2
+# http://www.bzip.org/ is no longer owned by the project:
+# https://lwn.net/Articles/762264/
+Source: bzip2-%{version}.tar.gz
 Patch0: bzip2-saneso-cflags.patch
 
 %description
