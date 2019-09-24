@@ -1,16 +1,18 @@
 #specfile originally created for Fedora, modified for Moblin Linux
-%define library_version 1.0.6
+%define library_version 1.0.8
 Summary: A file compression utility
 Name: bzip2
-Version: 1.0.6
-Release: 3
+Version: 1.0.8
+Release: 1
 License: BSD
 Group: Applications/File
-URL: https://git.merproject.org/mer-core/bzip2
+URL: https://git.sailfishos.org/mer-core/bzip2
 # http://www.bzip.org/ is no longer owned by the project:
 # https://lwn.net/Articles/762264/
 Source: bzip2-%{version}.tar.gz
-Patch0: bzip2-saneso-cflags.patch
+Patch0: bzip2-saneso.patch
+Patch1: bzip2-cflags.patch
+Patch2: bzip2-ldflags.patch
 
 %description
 Bzip2 is a freely available, patent-free, high quality data compressor.
@@ -50,8 +52,7 @@ Requires: bzip2 = %{version}-%{release}
 Man pages for %{name}.
 
 %prep
-%setup -q 
-%patch0 -p1 -b .saneso_cflags
+%autosetup -n %{name}-%{version}/%{name} -p1
 
 %build
 
