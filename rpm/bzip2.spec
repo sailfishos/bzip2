@@ -5,8 +5,7 @@ Name: bzip2
 Version: 1.0.8
 Release: 1
 License: BSD
-Group: Applications/File
-URL: https://git.sailfishos.org/mer-core/bzip2
+URL: https://github.com/sailfishos/bzip2
 # http://www.bzip.org/ is no longer owned by the project:
 # https://lwn.net/Articles/762264/
 Source: bzip2-%{version}.tar.gz
@@ -27,7 +26,6 @@ Install bzip2 if you need a compression utility.
 
 %package devel
 Summary: Header files developing apps which will use bzip2
-Group: Development/Libraries
 Requires: bzip2-libs = %{version}-%{release}
 
 %description devel
@@ -37,7 +35,6 @@ which will use the library.
 
 %package libs
 Summary: Libraries for applications using bzip2
-Group: System Environment/Libraries
 
 %description libs
 
@@ -45,7 +42,6 @@ Libraries for applications using the bzip2 compression format.
 
 %package doc
 Summary: Documentation for %{name}
-Group: Documentation
 Requires: bzip2 = %{version}-%{release}
 
 %description doc
@@ -103,6 +99,7 @@ install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} CHANGES README
 
 %files libs
 %defattr(-,root,root,-)
+%license LICENSE
 %{_libdir}/*so.*
 
 %files devel
